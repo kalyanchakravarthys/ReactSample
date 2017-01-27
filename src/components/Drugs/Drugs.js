@@ -33,22 +33,27 @@ class Drugs extends React.Component{
 
 	renderDrugsRow(drug, index){
 		var descId = 'desc' + index;
-		return <li><span key={index}>{drug.name}</span> ~ <span key={descId}>{drug.description}</span></li>;
+		return <li className='drug-item col-md-12'><div key={index} className="col-md-12"><b>Drug Name:</b> {drug.name}</div>  <div key={descId} className="col-md-12"><b>Description:</b> {drug.description}</div></li>;
 	}
 
 	render(){
-		return (<section className="jumbotron">
-					<h2>Drugs</h2>
+		return (<section className="jumbotron col-md-12">
+					<section className="col-md-4">
+						<h3>Add Drug</h3>
+						<div className="form-group">
+							<label>Drug Name:</label>
+							<input		type="text"		onChange={this.onNameChange}	className="form-control"	value={this.state.drug.name}/>
+						</div>
+						<div className="form-group">
+							<label>Description:</label>
+							<textarea type="text" className="form-control" onChange={this.onDescriptionChange} value={this.state.drug.description}></textarea>
+						</div>
+						<button className="btn btn-primary" onClick={this.onSaveData}>Save</button>
+					</section>
+					<section className="col-md-6">
+						<h3>My Drugs</h3>
 						<ul>{this.props.drugs.map(this.renderDrugsRow)}</ul>
-					<div className="form-group">
-						<label>Drug Name:</label>
-						<input		type="text"		onChange={this.onNameChange}	className="form-control"	value={this.state.drug.name}/>
-					</div>
-					<div className="form-group">
-						<label>Description:</label>
-						<input type="text" className="form-control" onChange={this.onDescriptionChange} value={this.state.drug.description}/>
-					</div>
-					<button className="btn btn-primary" onClick={this.onSaveData}>Save</button>
+					</section>
 				</section>
 				);
 	}
